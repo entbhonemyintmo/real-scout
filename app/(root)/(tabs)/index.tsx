@@ -10,13 +10,25 @@ export default function Index() {
                 alignItems: "center",
             }}
         >
-            <Text className="text-lg font-bold my-10 font-rubik-bold color-primary-300">
+            <Text className="text-3xl font-bold my-10 font-rubik-bold color-primary-300">
                 Welcome to Real Scout
             </Text>
 
-            <Link href="/profile">Profile</Link>
-            <Link href="/explore">Explore</Link>
-            <Link href="/properties/1">Property 1</Link>
+            <Link className="text-md mb-4 font-rubik-semibold" href="/sign-in">
+                Sign In
+            </Link>
+            <Link className="text-md mb-4 font-rubik-semibold" href="/profile">
+                Profile
+            </Link>
+            <Link className="text-md mb-4 font-rubik-semibold" href="/explore">
+                Explore
+            </Link>
+            <Link
+                className="text-md mb-4 font-rubik-semibold"
+                href="/properties/1"
+            >
+                Property 1
+            </Link>
         </View>
     );
 }
