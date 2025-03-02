@@ -1,8 +1,5 @@
 # Git Commit Convention Guide
-
-## Why Use a Commit Convention?
-
-A structured commit message format helps improve collaboration, maintainability, and version control clarity. This guide is designed for small frontend teams (3-5 members) to ensure consistency and readability.
+ 
 
 ## Commit Message Format
 
