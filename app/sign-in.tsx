@@ -1,34 +1,22 @@
 import { View, Text, ScrollView, Image, TouchableOpacity, Alert } from 'react-native';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import images from '@/constants/images';
 import icons from '@/constants/icons';
-import { getCurrentUser, login } from '@/lib/appwrite';
-import { Redirect, useRouter } from 'expo-router';
-import { Models } from 'react-native-appwrite';
+import { login } from '@/lib/appwrite';
+import { Redirect } from 'expo-router';
+import { useGlobalContext } from '@/lib/global-context-provider';
 
 const SignIn = () => {
-    const [user, setUser] = React.useState<Models.User<Models.Preferences> | null>(null);
-    const router = useRouter();
+    const { isLogged, loading, refetch } = useGlobalContext();
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            const user = await getCurrentUser();
-            if (user) {
-                setUser(user);
-                router.push('/profile');
-            }
-        };
-
-        fetchUser();
-    }, []);
+    if (!loading && isLogged) return <Redirect href="/profile" />;
 
     const handleSignIn = async () => {
         const result = await login();
 
         if (result) {
-            console.log('Login success');
-            router.push('/profile');
+            refetch();
         } else {
             console.log('Login failed');
             Alert.alert('Error', 'Failed to sign in');

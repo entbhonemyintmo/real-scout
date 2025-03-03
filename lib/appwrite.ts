@@ -12,16 +12,14 @@ const appwrite = new Client();
 
 appwrite.setEndpoint(config.endpoint!).setProject(config.projectId!).setPlatform(config.platform!);
 
-export const avater = new Avatars(appwrite);
+export const avatar = new Avatars(appwrite);
 export const account = new Account(appwrite);
 
 export async function login() {
     try {
         const redrictURL = Linking.createURL('/');
 
-        const createAccResponse = await account.createOAuth2Token(OAuthProvider.Google, redrictURL);
-
-        console.log('createAccResponse', createAccResponse);
+        const createAccResponse = account.createOAuth2Token(OAuthProvider.Google, redrictURL);
 
         if (!createAccResponse) throw new Error('Failed to create OAuth2 token');
 
@@ -63,11 +61,11 @@ export async function getCurrentUser() {
         const user = await account.get();
 
         if (user.$id) {
-            const userAvater = await avater.getInitials(user.name || 'User');
+            const userAvater = avatar.getInitials(user.name || 'User');
 
             return {
                 ...user,
-                avater: userAvater,
+                avatar: userAvater,
             };
         }
 
