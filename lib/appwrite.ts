@@ -1,6 +1,7 @@
 import { Account, Avatars, Client, OAuthProvider } from 'react-native-appwrite';
 import * as Linking from 'expo-linking';
 import { openAuthSessionAsync } from 'expo-web-browser';
+import { User } from './types';
 
 export const config = {
     platform: 'com.entbhone.realscout',
@@ -69,7 +70,7 @@ export async function getCurrentUser() {
             };
         }
 
-        return user;
+        return user as User;
     } catch (error) {
         console.error(error);
 

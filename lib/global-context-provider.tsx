@@ -1,10 +1,10 @@
 import React, { ReactNode } from 'react';
 import { useFetch } from './use-fetch';
 import { getCurrentUser } from './appwrite';
-import { Models } from 'react-native-appwrite';
+import { User } from './types';
 
 interface GlobalContextType {
-    user: Models.User<Models.Preferences> | null;
+    user: User | null;
     isLogged: boolean;
     loading: boolean;
     refetch: (newParams?: Record<string, any>) => Promise<void>;
