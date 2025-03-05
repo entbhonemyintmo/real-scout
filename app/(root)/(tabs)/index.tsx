@@ -3,6 +3,7 @@ import React from 'react';
 import images from '@/constants/images';
 import icons from '@/constants/icons';
 import Search from '@/components/Search';
+import FeatureCard from '@/components/FeatureCard';
 
 const Index = () => {
     return (
@@ -22,6 +23,18 @@ const Index = () => {
                 </View>
 
                 <Search />
+
+                <View className="my-5 flex-row flex justify-between items-center">
+                    <Text className="text-xl font-rubik-bold text-black-300">Featured</Text>
+                    <TouchableOpacity>
+                        <Text className="text-base font-rubik-bold text-primary-300">See All</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <View className="flex flex-row gap-4">
+                    <FeatureCard />
+                    <FeatureCard />
+                </View>
             </View>
         </SafeAreaView>
     );
