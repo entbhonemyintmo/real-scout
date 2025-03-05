@@ -70,7 +70,7 @@ const Profile = () => {
 
     return (
         <SafeAreaView className="h-full bg-white">
-            <ScrollView contentContainerClassName="pb-32 px-7">
+            <ScrollView contentContainerClassName="pb-32 px-5">
                 {/* Header */}
                 <View className="flex flex-row justify-between items-center mt-5">
                     <Text className="text-3xl font-bold">Profile</Text>
