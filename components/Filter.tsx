@@ -24,7 +24,7 @@ const Filter = () => {
                 <TouchableOpacity
                     key={index}
                     onPress={() => handleOnPress(item.category)}
-                    className={`min-w-14 mr-4 py-1.5 px-3 rounded-full flex-row items-center justify-center ${selected === item.category ? 'bg-primary-300' : 'bg-primary-100 border border-zinc-100'}`}
+                    className={`min-w-14 mr-3 py-1.5 px-3 rounded-full flex-row items-center justify-center ${selected === item.category ? 'bg-primary-300' : 'bg-primary-100 border border-zinc-100'}`}
                 >
                     <Text className={`text-base ${selected === item.category ? 'text-white font-rubik-bold' : 'text-black-200 font-rubik-medium'}`}>{item.title}</Text>
                 </TouchableOpacity>
