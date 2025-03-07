@@ -45,7 +45,7 @@ const FeatureCard = ({ item, onPress }: Props) => {
 
 const Card = ({ item, onPress }: Props) => {
     return (
-        <TouchableOpacity onPress={onPress} className="mb-5 flex p-3 rounded-2xl bg-white shadow-md shadow-black-100/30 relative">
+        <TouchableOpacity onPress={onPress} className="mb-5 basis-[48%] flex p-3 rounded-2xl bg-white shadow-md shadow-black-100/30 relative">
             <View className="flex flex-row items-center absolute px-2 top-5 right-5 bg-white/90 p-1 rounded-full z-50">
                 <Image source={icons.star} className="size-2.5" />
                 <Text className="text-xs font-rubik-bold text-primary-300 ml-0.5">{item.rating}</Text>

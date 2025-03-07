@@ -1,6 +1,5 @@
 import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView, FlatList, Button, ActivityIndicator } from 'react-native';
 import React, { useEffect } from 'react';
-import images from '@/constants/images';
 import icons from '@/constants/icons';
 import Search from '@/components/Search';
 import { Card, FeatureCard } from '@/components/Cards';
@@ -47,11 +46,11 @@ const Index = () => {
     return (
         <SafeAreaView className="h-full bg-white">
             <FlatList
-                data={latestProperties}
+                data={properties}
                 keyExtractor={(item) => item.$id}
                 renderItem={({ item }) => <Card item={item} onPress={() => handleCardPress(item.$id)} />}
                 numColumns={2}
-                columnWrapperClassName="flex gap-5 px-5"
+                columnWrapperClassName="flex item-center gap-5 px-5"
                 contentContainerClassName="pb-32"
                 showsVerticalScrollIndicator={false}
                 ListEmptyComponent={loading ? <ActivityIndicator size="large" className="text-primary-300 mt-5" /> : <NoResults />}
@@ -89,8 +88,7 @@ const Index = () => {
                         ) : (
                             <FlatList
                                 horizontal
-                                numColumns={2}
-                                data={properties}
+                                data={latestProperties}
                                 keyExtractor={(item) => item.$id}
                                 renderItem={({ item }) => <FeatureCard item={item} onPress={() => handleCardPress(item.$id)} />}
                                 showsHorizontalScrollIndicator={false}

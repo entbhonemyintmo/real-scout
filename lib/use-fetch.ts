@@ -1,44 +1,50 @@
-import { useCallback, useEffect, useState } from 'react';
 import { Alert } from 'react-native';
+import { useEffect, useState, useCallback } from 'react';
 
-type BaseParamsType = Record<string, string | number>;
-
-type UseFetchOptions<T, P extends BaseParamsType> = {
-    fn: (params?: P) => Promise<T>;
+interface UseFetchOptions<T, P extends Record<string, string | number>> {
+    fn: (params: P) => Promise<T>;
     params?: P;
     skip?: boolean;
-};
+}
 
-type UseFetchReturn<T, P> = { data: T | null; loading: boolean; error: string | null; refetch: (newParams?: P) => Promise<void> };
+interface UseFetchReturn<T, P> {
+    data: T | null;
+    loading: boolean;
+    error: string | null;
+    refetch: (newParams: P) => Promise<void>;
+}
 
-export function useFetch<T, P extends BaseParamsType>({ fn, params, skip = false }: UseFetchOptions<T, P>): UseFetchReturn<T, P> {
+export const useFetch = <T, P extends Record<string, string | number>>({ fn, params = {} as P, skip = false }: UseFetchOptions<T, P>): UseFetchReturn<T, P> => {
     const [data, setData] = useState<T | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(!skip);
     const [error, setError] = useState<string | null>(null);
 
-    const fetchData = useCallback(async () => {
-        try {
+    const fetchData = useCallback(
+        async (fetchParams: P) => {
             setLoading(true);
-            const result = await fn(params);
+            setError(null);
 
-            setData(result);
-        } catch (error) {
-            const errorMessage = error instanceof Error ? error.message : 'An error occurred';
-            setError(errorMessage);
-
-            Alert.alert('Error', errorMessage);
-        } finally {
-            setLoading(false);
-        }
-    }, [fn]);
-
-    const refetch = async (newParams?: P) => await fetchData();
+            try {
+                const result = await fn(fetchParams);
+                setData(result);
+            } catch (err: unknown) {
+                const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
+                setError(errorMessage);
+                Alert.alert('Error', errorMessage);
+            } finally {
+                setLoading(false);
+            }
+        },
+        [fn],
+    );
 
     useEffect(() => {
         if (!skip) {
-            fetchData();
+            fetchData(params);
         }
     }, []);
 
+    const refetch = async (newParams: P) => await fetchData(newParams);
+
     return { data, loading, error, refetch };
-}
+};
