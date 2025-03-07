@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView, FlatList, Button, ActivityIndicator } from 'react-native';
+import { View, Text, SafeAreaView, Image, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 import React, { useEffect } from 'react';
 import icons from '@/constants/icons';
 import Search from '@/components/Search';

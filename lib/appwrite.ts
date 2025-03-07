@@ -3,12 +3,6 @@ import * as Linking from 'expo-linking';
 import { openAuthSessionAsync } from 'expo-web-browser';
 import { User } from './types';
 
-// EXPO_PUBLIC_APPWRITE_DATABASE_ID=67cb157e000d3cccf00c
-// EXPO_PUBLIC_APPWRITE_AGENTS_COLLECTION_ID=67cb15aa0006f35a6e88
-// EXPO_PUBLIC_APPWRITE_GALLERIES_COLLECTION_ID=67cb16ae000fce1ffc96
-// EXPO_PUBLIC_APPWRITE_REVIEWS_COLLECTION_ID=67cb173900270f7ade0b
-// EXPO_PUBLIC_APPWRITE_PROPERTIES_COLLECTION_ID=67cb182e0011322b4d84
-
 export const config = {
     platform: 'com.entbhone.realscout',
     endpoint: process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT,
@@ -112,6 +106,9 @@ export async function getProperties({ filter, query, limit }: { filter: string; 
         if (limit) buildQuery.push(Query.limit(limit));
 
         const result = await databases.listDocuments(config.databaseId!, config.propertiesCollectionId!, buildQuery);
+
+        // console.log({ filter, query, limit });
+        // console.log(result.documents.map((doc) => doc.name));
 
         return result.documents;
     } catch (error) {
